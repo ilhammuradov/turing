@@ -1,6 +1,6 @@
 package az.edu.turing.lesson5;
 
-import java.sql.SQLOutput;
+
 import java.util.Scanner;
 
 public class LengthApp {
