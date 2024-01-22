@@ -10,7 +10,7 @@ public class SeasonApp {
         int number = scanner.nextInt();
 
         String result = (number >= 1 && number <= 12)
-                ? (number <= 5 ? "Spring" : (number <= 8 ? "Summer" : (number <= 11 ? "Autumn" : "Winter")))
+                ? ((number>2 && number <= 5) ? "Spring" : ((number>5 && number <= 8) ? "Summer" : (number>8 && number <= 11 ? "Autumn" : "Winter")))
                 : "Invalid number";
 
         System.out.println(result);
