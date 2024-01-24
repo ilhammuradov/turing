@@ -6,47 +6,43 @@ public class MonthApp {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter the number: ");
         int number = scanner.nextInt();
 
         if (number == 1) {
-            System.out.println("january");
+            System.out.println("January");
         } else if (number == 2) {
-            System.out.println("february");
+            System.out.println("February");
 
         } else if (number == 3) {
-            System.out.println("march");
+            System.out.println("March");
 
         } else if (number == 4) {
-            System.out.println("april");
+            System.out.println("April");
 
         } else if (number == 5) {
-            System.out.println("may");
+            System.out.println("May");
 
         } else if (number == 6) {
-            System.out.println("june");
+            System.out.println("June");
 
         } else if (number == 7) {
-            System.out.println("july");
+            System.out.println("July");
 
         } else if (number == 8) {
-            System.out.println("august");
+            System.out.println("August");
 
         } else if (number == 9) {
-            System.out.println("september");
+            System.out.println("September");
 
         } else if (number == 10) {
-            System.out.println("october");
+            System.out.println("October");
 
         } else if (number == 11) {
-            System.out.println("november");
+            System.out.println("November");
 
-        } else if (number == 12) {
-            System.out.println("december");
+        } else  {
+            System.out.println("December");
 
-        } else {
-            System.out.println("invalid number");
         }
     }
 }
