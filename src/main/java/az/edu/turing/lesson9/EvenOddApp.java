@@ -11,7 +11,7 @@ public class EvenOddApp {
         double k = Math.PI;
         System.out.println("Perimeter: " + 4 * n);
         System.out.println("Area: " + n * n);
-        System.out.println("Length: " + 2 * k * r);
-        System.out.println("Area: " + k * r * r);
+        System.out.println("Length  : " + 2 * k * r);
+        System.out.println("Area : " + k * r * r);
     }
 }
