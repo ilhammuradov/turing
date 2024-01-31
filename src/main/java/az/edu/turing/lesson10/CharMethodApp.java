@@ -3,7 +3,7 @@ package az.edu.turing.lesson10;
 public class CharMethodApp {
 
     public static void main(String[] args) {
-        char[] arr = new char[]{'x', 'y', 'z', 'k'};
+        char[] arr = {'x', 'y', 'z', 'k'};
         print(arr);
     }
 
