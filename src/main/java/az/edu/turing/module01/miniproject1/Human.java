@@ -1,15 +1,16 @@
 package az.edu.turing.module01.miniproject1;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Human {
 
     private String name;
     private String surname;
     private int dateOfBirth;
     private int iq;
-    private Human mother;
-    private Human father;
-    private Pet pet;
     private String[][] schedule;
+    private Family family;
 
     public Human(String name, String surname, int dateOfBirth) {
         this.name = name;
@@ -17,50 +18,22 @@ public class Human {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Human(String name,
-                 String surname,
-                 int dateOfBirth,
-                 Human mother,
-                 Human father) {
-        this.name = name;
-        this.surname = surname;
-        this.dateOfBirth = dateOfBirth;
-        this.mother = mother;
-        this.father = father;
-    }
-
-    public Human(String name,
-                 String surname,
-                 int dateOfBirth,
-                 int iq,
-                 Human mother,
-                 Human father,
-                 Pet pet,
-                 String[][] schedule) {
-        this.name = name;
-        this.surname = surname;
-        this.dateOfBirth = dateOfBirth;
-        this.iq = iq;
-        this.mother = mother;
-        this.father = father;
-        this.pet = pet;
-        this.schedule = schedule;
-    }
-
     public Human() {
     }
 
     public void greetPet() {
-        System.out.printf("Hello, %s", pet.getNickname());
+        System.out.printf("Hello, %s", family.getPet().getNickname());
     }
 
     public void describePet() {
+        Pet pet = family.getPet();
         if (pet.getTrickLevel() > 50) {
             System.out.printf("I have a %s is %d years old, he is very sly", pet.getSpecies(), pet.getAge());
         } else System.out.printf("I have an %s is %d years old, he is almost not sly", pet.getSpecies(), pet.getAge());
     }
 
     public boolean feedPet(boolean isFeedingTime) {
+        Pet pet = family.getPet();
         if (isFeedingTime || pet.getTrickLevel() > (int) (Math.random() * 100)) {
             System.out.println("Hm... I will feed " + pet.getNickname());
             return true;
@@ -77,10 +50,24 @@ public class Human {
                 ", surname='" + surname + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", iq=" + iq +
-                ", mother=" + mother.name + " " + mother.surname +
-                ", father=" + father.name + " " + father.surname +
-                ", pet=" + pet +
+                ", schedule=" + Arrays.toString(schedule) +
+                ", family=" + family +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return dateOfBirth == human.dateOfBirth && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Arrays.equals(schedule, human.schedule) && Objects.equals(family, human.family);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, surname, dateOfBirth, iq, family);
+        result = 31 * result + Arrays.hashCode(schedule);
+        return result;
     }
 
     public String getName() {
@@ -115,35 +102,19 @@ public class Human {
         this.iq = iq;
     }
 
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
     public String[][] getSchedule() {
         return schedule;
     }
 
     public void setSchedule(String[][] schedule) {
         this.schedule = schedule;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
     }
 }
