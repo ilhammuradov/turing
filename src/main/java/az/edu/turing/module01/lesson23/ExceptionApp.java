@@ -1,4 +1,4 @@
-package az.edu.turing.module01.lesson22;
+package az.edu.turing.module01.lesson23;
 
 import java.io.File;
 import java.io.FileNotFoundException;
