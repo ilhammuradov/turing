@@ -11,7 +11,7 @@ public final class Man extends Human {
     }
 
     @Override
-    public void greetPet() {
-        super.greetPet();
+    public void greetPet(Pet pet) {
+        super.greetPet(pet);
     }
 }

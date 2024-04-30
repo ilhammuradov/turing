@@ -1,8 +1,10 @@
 package az.edu.turing.module01.miniproject1;
 
+import java.util.Set;
+
 public class Dog extends Pet{
 
-    public Dog(String nickname,int age,int tricklevel,String[] habits,Species species){
+    public Dog(String nickname, int age, int tricklevel, Set<String> habits, Species species){
         super(nickname,age,tricklevel,habits);
         species=Species.DOG;
     }

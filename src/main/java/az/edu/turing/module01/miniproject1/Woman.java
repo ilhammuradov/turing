@@ -9,8 +9,9 @@ final class Woman extends Human {
         System.out.println("I am ready for 5 minutes... years passed");
     }
 
+
     @Override
-    public void greetPet() {
-        super.greetPet();
+    public void greetPet(Pet pet) {
+        super.greetPet(pet);
     }
 }

@@ -1,19 +1,18 @@
 package az.edu.turing.module01.miniproject1;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Family {
 
     private Human mother;
     private Human father;
-    private Human[] children;
-    private Pet pet;
+    private List<Human> children;
+    private Set<Pet> pet;
 
-    public Family(Human mother, Human father) {
+    public Family(Human mother, Human father, List<Human> children) {
         this.mother = mother;
         this.father = father;
-        this.children = new Human[0];
+        this.children = children;
     }
 
     public Human getMother() {
@@ -32,47 +31,68 @@ public class Family {
         this.father = father;
     }
 
-    public Human[] getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(Human[] children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
-    public Pet getPet() {
+    public Set<Pet> getPet() {
         return pet;
     }
 
-    public void setPet(Pet pet) {
+    public void setPet(Set<Pet> pet) {
         this.pet = pet;
     }
 
     public void addChild(Human child) {
-        this.children = new Human[]{child};
-        Human[] newChildren = Arrays.copyOf(children, children.length + 1);
-        newChildren[newChildren.length - 1] = child;
-        children = newChildren;
+        if (children == null) {
+            children = new ArrayList<>();
+        }
+        children.add(child);
     }
 
     public boolean deleteChild(int index) {
-        if (index < 0 || index >= children.length) {
+        if (children == null || index < 0 || index >= children.size()) {
             return false;
         }
-        Human[] newChildren = new Human[children.length - 1];
-        int newIndex = 0;
-        for (int i = 0; i < children.length; i++) {
-            if (i != index) {
-                newChildren[newIndex] = children[i];
-                newIndex++;
-            }
-        }
-        children = newChildren;
+        children.remove(index);
         return true;
     }
 
     public int countFamily() {
-        return children.length + 2;
+        return children.size() + 2;
+    }
+
+    String prettyFormat(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("family :\n\t\t");
+        sb.append( "mother : " + mother + "\n\t\t");
+        sb.append("father : " + getFather() + "\n\t\t");
+        sb.append("children :\n\t\t\t\t");
+        getChildren().stream().filter(x->x instanceof Man).forEach(child->sb.append("boy : " + child + "\n\t\t\t\t"));
+        getChildren().stream().filter(x->x instanceof Woman).forEach(child->sb.append("girl : " +child +"\n\t\t\t\t"));
+
+        sb.append("\n\t\tpets : " + getPet());
+
+        return sb.toString();
+
+}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.equals(children, family.children) && Objects.equals(pet, family.pet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mother, father, children, pet);
     }
 
     @Override
@@ -80,23 +100,8 @@ public class Family {
         return "Family{" +
                 "mother=" + mother +
                 ", father=" + father +
-                ", children=" + Arrays.toString(children) +
+                ", children=" + children +
                 ", pet=" + pet +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Family family = (Family) o;
-        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(mother, father, pet);
-        result = 31 * result + Arrays.hashCode(children);
-        return result;
     }
 }
