@@ -16,10 +16,7 @@ public class StudentInMemoryRepository implements StudentRepository {
 
     @PostConstruct
     public void init() {
-        STUDENTS =new ArrayList<>(List.of(
-                new Student(1L, "Ilham", 19, LocalDate.now(), LocalDate.now()),
-                new Student(2L, "Mamed", 21, LocalDate.now(), LocalDate.now()),
-                new Student(3L, "Qulu", 18, LocalDate.now(), LocalDate.now())));
+        STUDENTS = new ArrayList<>(List.of(new Student(1L, "Ilham", 19, LocalDate.now(), LocalDate.now()), new Student(2L, "Mamed", 21, LocalDate.now(), LocalDate.now()), new Student(3L, "Qulu", 18, LocalDate.now(), LocalDate.now())));
     }
 
     @Override
