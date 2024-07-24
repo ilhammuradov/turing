@@ -1,20 +1,18 @@
 package az.edu.turing.springboot03.domain.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Student {
-    private Long id;
-    private String name;
-    private Integer age;
-    private LocalDate createDate;
-    private LocalDate updateDate;
+    @Id
+    Long id;
+    String name;
+    Integer age;
+    Long grade;
 }

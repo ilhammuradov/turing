@@ -1,15 +1,16 @@
 package az.edu.turing.springboot03.controller;
 
 import az.edu.turing.springboot03.domain.entity.Student;
+import az.edu.turing.springboot03.model.StudentRequest;
+import az.edu.turing.springboot03.model.StudentView;
 import az.edu.turing.springboot03.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/students")
@@ -18,40 +19,74 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
-    public List<Student> getStudents() {
-        log.info("GET -> api/v1/students");
-        return studentService.findAll();
+    public List<StudentView> getAll() {
+        List<Student> students = studentService.getAll();
+        return students.stream()
+                .map(student -> new StudentView(
+                        student.getId(),
+                        student.getName(),
+                        student.getAge(),
+                        student.getGrade()
+                ))
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
-        log.info("GET -> api/v1/students/{}", id);
+    public ResponseEntity<StudentView> getById(@PathVariable Long id) {
+        Optional<Student> studentOpt = studentService.getById(id);
+        if (studentOpt.isPresent()) {
+            Student student = studentOpt.get();
+            StudentView studentView = new StudentView(
+                    student.getId(),
+                    student.getName(),
+                    student.getAge(),
+                    student.getGrade()
+            );
+            return ResponseEntity.ok(studentView);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public StudentView create(@RequestBody StudentRequest studentRequest) {
+        Student student = studentService.create(studentRequest);
+        return new StudentView(
+                student.getId(),
+                student.getName(),
+                student.getAge(),
+                student.getGrade()
+        );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentView> update(@PathVariable Long id, @RequestBody StudentRequest studentRequest) {
         try {
-            Student student = studentService.findById(id);
-            return ResponseEntity.ok(student);
+            Student student = studentService.update(id, studentRequest);
+            StudentView studentView = new StudentView(
+                    student.getId(),
+                    student.getName(),
+                    student.getAge(),
+                    student.getGrade()
+            );
+            return ResponseEntity.ok(studentView);
         } catch (IllegalArgumentException e) {
-            log.error("No student with id {}: {}", id, e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.notFound().build();
         }
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Long> numberOfStudents() {
+        return ResponseEntity.ok(studentService.count());
+    }
 
-    @PostMapping
-    public Student create(@RequestBody Student student) {
-        log.info("POST -> api/v1/students");
-        return studentService.save(student);
+    @GetMapping("/exist/{id}")
+    public ResponseEntity<Boolean> isStudentExist(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.existsById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> cancelStudent(@PathVariable Long id) {
-        log.info("DELETE -> api/v1/students/{}", id);
-        try {
-            studentService.deleteById(id);
-            return ResponseEntity.ok("Student with id " + id + " has been deleted.");
-        } catch (IllegalArgumentException e) {
-            log.error("Error deleting student with id {}: {}", id, e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        studentService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
-
