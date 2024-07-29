@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/profiles")
 public class ProfileController {
-    ProfileService profileService;
+   private final ProfileService profileService;
 
     @GetMapping
     public ResponseEntity<List<ProfileResponse>> getAllProfiles() {
@@ -50,6 +50,12 @@ public class ProfileController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteProfile(@PathVariable @NonNull Long id) {
         profileService.deleteProfile(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("all")
+    public ResponseEntity<Void> deleteAllProfiles() {
+        profileService.deleteAllProfiles();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

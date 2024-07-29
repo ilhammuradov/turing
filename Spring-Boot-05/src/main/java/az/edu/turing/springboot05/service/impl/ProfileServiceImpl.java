@@ -70,6 +70,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public void deleteAllProfiles() {
+        profileRepository.deleteAll();
+    }
+
+    @Override
     public Long countProfiles() {
         return profileRepository.count();
     }

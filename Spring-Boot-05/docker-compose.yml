@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: profile_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: student
+    ports:
+      - "5430:5432"
+
+  app:
+    image: profileapp:latest
+    container_name: profile-app
+    depends_on:
+      - postgres
+    ports:
+      - "8084:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    network_mode: "host"
+#    tty: true
+#    stdin_open: true
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/student
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect

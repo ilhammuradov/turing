@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: Spring-Boot-05
+    datasource:
+        password: postgres
+        url: jdbc:postgresql://localhost:5430/student
+        username: postgres
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
