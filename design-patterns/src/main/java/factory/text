@@ -1,0 +1,11 @@
+Key Concepts of Factory Design Pattern:
+
+1. Factory Method: Defines an interface for creating an object but lets subclasses decide which class to instantiate.
+
+2. Product: The interface or abstract class representing the objects that the factory method creates.
+
+3. Concrete Product: A specific implementation of the product interface.
+
+4. Creator: The abstract class that declares the factory method. This class may also define a default implementation of the factory method.
+
+5. Concrete Creator: Implements the factory method to create specific concrete products.
