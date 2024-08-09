@@ -1,23 +1,8 @@
 package decorator;
 
-public class Notifier implements INotifier {
+public interface Notifier {
 
-    private final String username;
-    private final DatabaseService databaseService;
+    void send(String message);
 
-    public Notifier(String username) {
-        this.username = username;
-        databaseService = new DatabaseService();
-    }
-
-    @Override
-    public void send(String msg) {
-        String mail = databaseService.getMailFromUsername(username);
-        System.out.println("Sending " + msg + " by Mail to " + mail);
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
+    String getUsername();
 }

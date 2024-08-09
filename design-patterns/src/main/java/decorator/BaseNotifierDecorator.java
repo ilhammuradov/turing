@@ -1,23 +1,22 @@
 package decorator;
 
-public abstract class BaseNotifierDecorator implements INotifier {
+public abstract class BaseNotifierDecorator implements Notifier {
 
-    private final INotifier wrapped;
+    private final Notifier wrapped;
     protected final DatabaseService databaseService;
 
-    BaseNotifierDecorator(INotifier wrapped) {
+    BaseNotifierDecorator(Notifier wrapped) {
         this.wrapped = wrapped;
         databaseService = new DatabaseService();
     }
 
-    @Override
+
     public void send(String msg) {
         wrapped.send(msg);
     }
 
-    @Override
+
     public String getUsername() {
         return wrapped.getUsername();
     }
-
 }

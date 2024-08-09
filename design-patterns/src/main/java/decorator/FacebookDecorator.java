@@ -2,7 +2,7 @@ package decorator;
 
 public class FacebookDecorator extends BaseNotifierDecorator {
 
-    public FacebookDecorator(INotifier wrapped) {
+    public FacebookDecorator(Notifier wrapped) {
         super(wrapped);
     }
 
@@ -11,5 +11,4 @@ public class FacebookDecorator extends BaseNotifierDecorator {
         String fbName = databaseService.getFBNameFromUsername(getUsername());
         System.out.println("Sending " + msg + " on Facebook to " + fbName);
     }
-
 }

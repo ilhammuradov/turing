@@ -2,7 +2,7 @@ package decorator;
 
 public class WhatsAppDecorator extends BaseNotifierDecorator {
 
-    public WhatsAppDecorator(INotifier wrapped) {
+    public WhatsAppDecorator(Notifier wrapped) {
         super(wrapped);
     }
 

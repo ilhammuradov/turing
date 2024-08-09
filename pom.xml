@@ -7,6 +7,10 @@
     <groupId>az.edu.turing</groupId>
     <artifactId>Java-course-turing</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>design-patterns</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

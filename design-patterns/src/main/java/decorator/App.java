@@ -4,12 +4,13 @@ public class App {
 
     public static void main(String[] args) {
 
-        INotifier notifyAll = new FacebookDecorator(new WhatsAppDecorator(new Notifier("ilham")));
-        notifyAll.send("Order is ready!!!");
+        Notifier notifyAll = new FacebookDecorator(new WhatsAppDecorator(new NotifierImpl("Ilham")));
+//        notifyAll.send("Order is ready!!!");
 
         System.out.println("==========================================");
 
-        INotifier notifyFbMail = new FacebookDecorator(new Notifier("ilham"));
+        BaseNotifierDecorator notifyFbMail = new FacebookDecorator(new NotifierImpl("ilham"));
+     //   BaseNotifierDecorator notify= new Notifier("eefw");
         notifyFbMail.send("Order is ready!!!");
     }
 }
